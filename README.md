@@ -19,8 +19,8 @@ Matlab script for intercepting messages between host computer and any device via
 
 <img src="pic/prog_port_select.png" width="150" alt="prog_port_select.png" />
 
-5) In the script settings, set COM_port_host to the second linked port.
-
-6) In the script settings, set the COM_port_device parameter to the port to which the device is connected.
+5) In the script settings:
+- set COM_port_host to the second linked port.
+- set COM_port_device to the port to which the device is connected.
 
 <img src="pic/matlab_settings.png" width="500" alt="matlab_settings.png" />
