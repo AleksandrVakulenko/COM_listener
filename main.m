@@ -6,7 +6,7 @@
 % 2) Add print to console
 % 3) Do some tests
 
-COM_port_host = "COM10"; % one side of com0com link
+COM_port_host = "COM11"; % one side of com0com link
 COM_port_device = "COM5"; % real device port
 BAUD_rate = 9600; % same baud rate for both ports
 

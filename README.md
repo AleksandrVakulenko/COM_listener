@@ -25,3 +25,8 @@ Matlab script for intercepting messages between host computer and any device via
 - set BAUD_rate to the value required for the device to operate properly.
 
 <img src="pic/matlab_settings.png" width="500" alt="matlab_settings.png" />
+
+
+- An example of the resulting communication diagram:
+
+<img src="link_diagram.png" width="400" alt="matlab_settings.png" />
