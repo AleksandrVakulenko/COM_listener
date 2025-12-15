@@ -11,6 +11,10 @@ Matlab script for intercepting messages between host computer and any device via
 
 ![image](pic/com0com_settings.png)
 
+<img src="pic/com0com_settings.png" width="200" alt="Alt Text" />
+
+<img src="pic/com0com_settings.png" width="100" alt="Alt Text" />
+
 3) Make sure the two new ports are available in Device Manager.
 
 ![image](pic/device_manager.png)
