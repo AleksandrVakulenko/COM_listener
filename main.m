@@ -1,5 +1,10 @@
 
-
+% V1.0
+%
+% TODO (2025.12.15):
+% 1) Add loging
+% 2) Add print to console
+% 3) Do some tests
 
 COM_port_host = "COM10"; % one side of com0com link
 COM_port_device = "COM5"; % real device port
