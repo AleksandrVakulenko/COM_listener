@@ -29,4 +29,4 @@ Matlab script for intercepting messages between host computer and any device via
 
 - An example of the resulting communication diagram:
 
-<img src="link_diagram.png" width="400" alt="matlab_settings.png" />
+<img src="pic/link_diagram.png" width="400" alt="link_diagram.png" />
