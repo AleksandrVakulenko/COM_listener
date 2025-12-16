@@ -7,11 +7,11 @@
 % 3) Do some tests
 
 COM_port_host = "COM11"; % one side of com0com link
-COM_port_device = "COM5"; % real device port
-BAUD_rate = 9600; % same baud rate for both ports
+COM_port_device = "COM3"; % real device port
+BAUD_rate = 230400; % same baud rate for both ports
 
 % settings
-pause_time = 0.05; % [s]
+pause_time = 0.00; % [s]
 
 % init loop variables
 Bytes_from_host = 0;
@@ -26,6 +26,7 @@ clc
 
 try
     fig = create_figure();
+    drawnow
     Timer_obj = tic;
     while(~figure_should_close(fig))
         Time = toc(Timer_obj);
@@ -37,11 +38,18 @@ try
         % send data (if any)
         if ~isempty(data_from_device)
             write(ser_host, data_from_device, "uint8");
+            disp(['DEV: (' num2str(numel(data_from_device)) ')' ...
+                num2str(data_from_device)])
         end
         if ~isempty(data_from_host)
             write(ser_device, data_from_host, "uint8");
+            disp(['HOST: (' num2str(numel(data_from_host)) ')' ...
+                num2str(data_from_host)])
         end
-
+    
+        if isempty(data_from_host) && isempty(data_from_device)
+            disp('no data')
+        end
 
         Bytes_from_host = Bytes_from_host + numel(data_from_host);
         Bytes_from_device = Bytes_from_device + numel(data_from_device);
@@ -53,7 +61,7 @@ try
         plot_number_of_bytes(fig, Time_arr, Bytes_from_host_arr, ...
             Bytes_from_device_arr);
         drawnow
-        pause(pause_time)
+%         pause(pause_time)
     end
 catch err
     delete(ser_host);
@@ -138,7 +146,10 @@ function plot_number_of_bytes(fig, Time, Num_bytes_from_host, ...
         figure(fig);
 
         subplot('Position', [0.08 0.45 0.38 0.5]);
-        plot(Time, Num_bytes_from_host)
+        cla
+        hold on
+        plot(Time, Num_bytes_from_host, '-b')
+        plot(Time, Num_bytes_from_device, '-r')
         ylabel('bytes from host')
         xlabel('time, s')
         set(gca, 'fontsize', 10)
