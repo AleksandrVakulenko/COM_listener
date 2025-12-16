@@ -1,3 +1,4 @@
 *.asv
 test*.m
 test/
+log_files/

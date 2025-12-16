@@ -1,15 +1,22 @@
+% V1.1
+%
+% TODO (2025.12.15):
+% 1) convert to char for console log
+% 2) 
 
-% Special type of callback for my Temp_controller_N2
 
 COM_port_host = "COM11"; % one side of com0com link
-COM_port_device = "COM6"; % real device port
-BAUD_rate = 9600; % same baud rate for both ports
+COM_port_device = "COM3"; % real device port
+BAUD_rate = 230400; % same baud rate for both ports
 
 
 clc
 
+% init timer
+Timer_obj = tic;
+
 [ser_host, ser_device] = ...
-    link_serial_ports(COM_port_host, COM_port_device, BAUD_rate);
+    link_serial_ports(COM_port_host, COM_port_device, BAUD_rate, Timer_obj);
 
 
 % init loop variables and run main
@@ -44,8 +51,11 @@ catch err
     rethrow(err);
 end
 
-Host_data_final = ser_host.UserData;
-Device_data_final = ser_device.UserData;
+Log_data_host = ser_host.UserData;
+Log_data_device = ser_device.UserData;
+
+save_log_files(Log_data_host, Log_data_device);
+disp('Log file ready')
 
 delete(fig)
 disp('finish (main)')
@@ -57,8 +67,8 @@ disp('Both serial obj closed')
 
 %% Serial and Callback part
 
-function [ser_host, ser_device] = ...
-    link_serial_ports(COM_port_host, COM_port_device, BAUD_rate)
+function [ser_host, ser_device] = link_serial_ports(COM_port_host, ...
+    COM_port_device, BAUD_rate, Timer_obj)
 
     ser_host = serialport(COM_port_host, BAUD_rate);
     
@@ -79,10 +89,6 @@ function [ser_host, ser_device] = ...
         rethrow(err)
     end
     disp("Callback ready")
-
-
-    % init timer
-    Timer_obj = tic;
 
     % init UserData for both serial obj
     Host_data = struct('name', "host", ...
@@ -171,14 +177,56 @@ function plot_number_of_bytes(fig, Time, Num_bytes_from_host, ...
         plot(Time, Num_bytes_from_host, '-b')
         ylabel('bytes from host')
         xlabel('time, s')
+        title([num2str(Num_bytes_from_host(end)) ' bytes'])
         set(gca, 'fontsize', 10)
 
         subplot('Position', [0.56 0.45 0.38 0.5]);
         plot(Time, Num_bytes_from_device)
         ylabel('bytes from device')
         xlabel('time, s')
+        title([num2str(Num_bytes_from_device(end)) ' bytes'])
         set(gca, 'fontsize', 10)
 end
+
+
+
+%% Log file write
+
+
+function status = find_folder_in_dir(folder, name)
+arguments
+    folder string
+    name string
+end
+    type = "folder";
+    content = dir(folder);
+    content = struct2cell(content);
+    all_names = content(1, :);
+    is_dir = content(5, :);
+    ind = find(ismember(all_names, name));
+
+    status = ~isempty(ind);
+    status = status && is_dir{ind};
+end
+
+
+function create_log_folder()
+    exist = find_folder_in_dir('.', "log_files");
+    if ~exist
+        mkdir('log_files');
+    end
+end
+
+function save_log_files(host_log, dev_log)
+    create_log_folder();
+    filename = char(datetime);
+    filename(filename == ' ') = '_';
+    filename(filename == '-') = '_';
+    filename(filename == ':') = '_';
+    filename = fullfile(['log_files/' filename '.mat']);
+    save(filename, "host_log", "dev_log");
+end
+
 
 
 

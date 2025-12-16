@@ -1,4 +1,4 @@
-# COM listener V1.0
+# COM listener V1.1
 Matlab script for intercepting messages between host computer and any device via RS232.
 
 ## Dependences
