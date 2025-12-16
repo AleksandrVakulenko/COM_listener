@@ -7,7 +7,7 @@ Matlab script for intercepting messages between host computer and any device via
 ## Usage
 1) Install com0com.
 
-<img src="pic/com0com_setup.png" width="200" alt="com0com_setup.png" />
+<img src="pic/com0com_setup.png" width="320" alt="com0com_setup.png" />
 
 2) Run com0com/setupg.exe and set linked port numbers (if you don't want to use the default ones)
 
