@@ -32,3 +32,17 @@ Matlab script for intercepting messages between host computer and any device via
 - An example of the resulting communication diagram:
 
 <img src="pic/link_diagram.png" width="400" alt="link_diagram.png" />
+
+6) Run main.m; a diagram with two graphs will appear. The graphs show the number of bytes transferred by the host and device over time.
+
+7) Run the measurements in your main program, verifying that packets are being captured and all equipment is working correctly.
+
+8) Once the measurements are complete, click the "Exit" button. The connections to the ports will be closed, and the log files will be saved in the "log_files" folder.
+
+<img src="pic/figure_view.png" width="350" alt="figure_view.png" />
+
+
+
+
+
+
