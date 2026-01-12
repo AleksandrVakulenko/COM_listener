@@ -46,5 +46,6 @@ Matlab script for intercepting messages between host computer and any device via
 
 - To find all avilable COM ports run this function:
 [seriallist](https://www.mathworks.com/help/matlab/ref/seriallist.html)
+ OR 
 [serialportlist](https://www.mathworks.com/help/matlab/ref/serialportlist.html)
 
