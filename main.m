@@ -153,8 +153,9 @@ function fig = create_figure()
     
     fig = figure('Position', [X_pos Y_pos X_size Y_size]);
     button_exit = uicontrol("Style", "pushbutton", "String", "Exit", ...
-        "Callback", @exit_foo, "UserData", struct('stop', false), ...
+        "Callback", @exit_foo, ...
         "Position", [20,20,82.5,33.5]);
+    button_exit.UserData = struct('stop', false);
     fig.UserData = struct('Exit_btn', button_exit);
     
     end
